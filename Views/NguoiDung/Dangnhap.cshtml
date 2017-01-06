@@ -1,0 +1,50 @@
+﻿@model WebBanBanh.Models.DangNhapModel
+@{
+    ViewBag.Title = "Dangnhap";
+    Layout = "~/Views/Shared/_LayoutNguoiDung.cshtml";
+}
+
+<style>
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+<h4 style="color:red; text-align:center"> @ViewBag.Thongbao</h4>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8" style="border:1px double #222; border-radius:5px;background-color:#ffffff">
+        @using (Html.BeginForm("DangNhap", "NguoiDung", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+
+            <div class="form-group" style="margin-top:10px">
+                <h3 style="text-align:center; color:black;margin-top:20px">ÐĂNG NHẬP</h3>
+                <b><label style="margin-left:25%">Nhập tài khoản</label></b>
+                <div style="margin-left:25%;width:60%">
+                    @Html.EditorFor(model => model.TaiKhoanKH, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.TaiKhoanKH, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <b><label style="margin-left:25%">Nhập mật khẩu</label></b>
+                <div style="margin-left:25%;width:60%">
+                    @Html.EditorFor(model => model.MatKhauKH, new { htmlAttributes = new { @class = "form-control", @type = "password" } })
+                    @Html.ValidationMessageFor(model => model.MatKhauKH, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            <div style="margin-left:25%;margin-bottom:5%; " class="form-group">
+                <a href="/NguoiDung/DangKy">
+                    <ul style="color:blue; text-decoration:none"> Nếu bạn chưa có tài khoản vui lòng đăng kí</ul>
+                </a>
+                <input type="submit" class="btn btn-default" value="Ðăng nhập" style="margin-left:15%">
+            </div>
+        }
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
