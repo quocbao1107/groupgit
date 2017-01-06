@@ -1,0 +1,138 @@
+﻿
+<!DOCTYPE HTML>
+<html xmlns:fb='http://www.facebook.com/2008/fbml'>
+<head>
+    <meta property="fb:app_id" content="276283632748056" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lee's Store - Chuyên cung cấp bánh kẹo chất lượng giá rẻ...</title>
+    <script src="~/Scripts/modernizr-2.6.1.min.js"></script>
+    <script src="~/Scripts/lean-slider.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/sample-styles.css" rel="stylesheet" />
+    <link href="~/Content/lean-slider.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+</head>
+<body style="background-image: url('../../images/background.jpg')  ">
+    <div class="container-fluid" id="fixNav">
+        <nav class=" navbar navbar-inverse" style="margin-bottom:0;height:25px">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="row">
+                <div class="col-md-1"></div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="col-md-6 ">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#" style="padding:2px 15px"><img style="height:45px;margin-left:5px;margin-top:0" src="~/images/logo.png" />Lee's Store</a>
+                            </li>
+                            <li style=""><a href="~/Home/index">TRANG CHỦ</a></li>
+                            <li style=""><a href="~/Candy/SanPham">SẢN PHẨM</a></li>
+                            
+                            <li style=""><a href="#zbwid-46def30e">GÓP Ý</a></li>
+                            <li style=""><a href="~/NguoiDung/lienhe">LIÊN HỆ</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <ul class="nav navbar-nav navbar-right ">
+                        @*<li style="margin-top:10px"> <p><a style=" color:#ffffff; text-decoration:none;font-size:20px" href="@Url.Action("GioHang","GioHang")" class="glyphicon glyphicon-shopping-cart"></a>@Html.Action("GioHangPartial", "GioHang")</p> </li>*@
+                        <li style="margin-top:10px"><p><a style="color:#ffffff; text-decoration:none;font-size:20px" href="@Url.Action("GioHang","GioHang")" class="glyphicon glyphicon-shopping-cart"></a>@Html.Action("GioHangPartial","GioHang")</p></li>
+                        @if (Session["TaiKhoan"] == null)
+                        {
+                            <li><a href="~/NguoiDung/DangNhap">ĐĂNG NHẬP</a></li>
+                                        <li><a href="~/NguoiDung/DangKy">ĐĂNG KÝ</a></li>
+                        }
+                        else
+                        {
+                            <li><a href="~/NguoiDung/DangNhap"><b></b>@Session["Name"] !!!</a></li>
+                                        <li><a href="~/NguoiDung/DangXuat">ĐĂNG XUẤT</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-1"></div>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </div> <!-- /.container-fluid -->
+    <div class="container">
+        <div class="slider-wrapper" style="margin:5px 0%;">
+            <div id="slider">
+                <div class="slide3">
+                    <img style="margin-top: 40px;width:100%;" src="~/images/anhbia.jpg" />
+                   
+                </div>
+                @*<div class="slide4">
+                    <img src="~/images/1.jpg" alt="" />
+                </div>*@
+            </div>
+            <div id="slider-direction-nav"></div>
+            <div id="slider-control-nav"></div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="col-md-4" id="menuleft">
+            <div class="panel panel-default">
+                <div style="background-color:#333333;text-align:center; color:white;font-weight:bold " class="panel-heading">BÁNH THEO LOẠI</div>
+                <div style="background-color:white" class="panel-body">@Html.Action("TheoLoaiSP", "Candy")</div>
+            </div>
+            <div class="panel panel-default" style="margin-top:0">
+                <div style="background-color:#333333; color:white;font-weight:bold; text-align:center " class="panel-heading">BÁNH THEO NHÀ SẢN XUẤT</div>
+                <div style="background-color:white" class="panel-body">@Html.Action("TheoNhaSanXuat", "Candy")</div>
+            </div>
+            @*<div class="panel panel-default" style="margin-top:0">
+                @Html.Action("TinTucRss", "Home")
+            </div>*@
+        </div>
+        <div class="col-md-8 ">
+            @*-------Search-------*@
+            @using (Html.BeginForm("Search", "TimKiem", FormMethod.Post))
+            {
+                <div style="width:100%">
+                    <input type="text" class="form-group" name="Keywords" style="width:90%" placeholder="Bạn muốn tìm gì...." />
+                    @*@Html.TextBox("Keywords", null, new { @class = "form-group" })*@
+                    <button type="submit">Search</button>
+                </div>
+            }
+        </div>
+        <div class="col-md-8">@RenderBody()</div>
+    </div>
+    <footer style="text-align:center;border:#222 solid 2px;background:#333333;height:40px;color:white">
+        <h4 style="margin-top:5px">  &copy; LẬP TRÌNH WEB - GVHD: DƯƠNG THÀNH PHẾT</h4>
+    </footer>
+    <div id="fb-root"></div>
+    <script>
+(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v2.7&appId=276283632748056";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+    <script type="text/javascript">
+    (function (d, s, id) { var z = d.createElement(s); z.type = "text/javascript"; z.id = id; z.async = true; z.src = "//static.zotabox.com/a/f/afe7096f9356413bbd720bb053a90665/widgets.js"; var sz = d.getElementsByTagName(s)[0]; sz.parentNode.insertBefore(z, sz) }(document, "script", "zb-embed-code"));
+    </script>
+
+    <script type='text/javascript'>window._sbzq||function(e){e._sbzq=[];var t=e._sbzq;t.push(["_setAccount",53072]);var n=e.location.protocol=="https:"?"https:":"http:";var r=document.createElement("script");r.type="text/javascript";r.async=true;r.src=n+"//static.subiz.com/public/js/loader.js";var i=document.getElementsByTagName("script")[0];i.parentNode.insertBefore(r,i)}(window);</script>
+</body>
+</html>
+        @*<script type="text/javascript">
+            $(document).ready(function () {
+                var slider = $('#slider').leanSlider({
+                    directionNav: '#slider-direction-nav',
+                    controlNav: '#slider-control-nav'
+                });
+            });
+</script>*@
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
+

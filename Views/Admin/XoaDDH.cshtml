@@ -1,0 +1,94 @@
+﻿@model WebBanBanh.Models.DONDATHANG
+
+@{
+    ViewBag.Title = "XoaDDH";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .my-button {
+        width: 150px;
+        margin-left: 10px;
+    }
+</style>
+<h2>XÓA ĐƠN ĐẶT HÀNG</h2>
+
+<h3>Bạn có chắc chắn muốn xóa đơn đặt hàng?</h3>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayDat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TinhTrangGiaoHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrangGiaoHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TenNguoiNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNguoiNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SdtNguoiNhan)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SdtNguoiNhan)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DCGiaoHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DCGiaoHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NgayGiao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayGiao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MaKH)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MaKH)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-lg-offset-3 col-lg-9">
+                <button class="btn btn-danger my-button" type="submit">
+                    <span class="icon_trash_alt"></span>
+                    Xóa
+                </button>
+                <a class="btn btn-warning my-button" href="/Admin/SanPham">
+                    <span class="glyphicon glyphicon-arrow-left">
+                        Trở về
+                    </span>
+                </a>
+            </div>
+        </div>
+    }
+</div>

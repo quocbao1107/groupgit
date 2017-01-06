@@ -1,0 +1,110 @@
+﻿@model WebBanBanh.Models.SANPHAM
+
+@{
+    ViewBag.Title = "XoaSP";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .my-button {
+        width: 150px;
+        margin-right: 10px;
+    }
+</style>
+<h3 style="font-weight:bold">XÁC NHẬN THÔNG TIN CẦN XÓA SẢN PHẨM</h3>
+
+<h4>Bạn chắc chắn muốn xóa sản phẩm này không?</h4>
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tên sản phẩm:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenSP)
+        </dd>
+
+        <dt>
+            Giá bán:
+        </dt>
+
+        <dd>
+            @String.Format("{0:0:0}", Model.GiaBan) VNĐ
+        </dd>
+
+        <dt>
+            Mô tả:
+        </dt>
+
+        <dd style="width:600px; text-align: center">
+            @Html.DisplayFor(model => model.MoTa)
+        </dd>
+
+        <dt>
+            Ảnh bìa:
+        </dt>
+
+        <dd>
+            <img src="@Url.Content("~/HinhSanPham/" + Model.AnhBia)" width="120px" />
+        </dd>
+
+        <dt>
+            Ngày cập nhật:
+        </dt>
+
+        <dd>
+            @String.Format("{0:dd/MM/yyyy}", Model.NgayCapNhat)
+        </dd>
+
+        <dt>
+            Số lượng tồn:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SoLuongTon)
+        </dd>
+
+        <dt>
+            Phần trăm khuyến mãi:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhanTramKM)
+        </dd>
+
+        <dt>
+            Mã nhà sản xuất:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NHASANXUAT.TenNSX)
+        </dd>
+
+        <dt>
+            Mã loại sản phẩm:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LOAISP.TenLoaiSP)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="row">
+            <div class="col-lg-offset-3 col-lg-9">
+                <button class="btn btn-danger my-button" type="submit">
+                    <span class="icon_trash_alt"></span>
+                    Xóa
+                </button>
+                <a class="btn btn-warning my-button" href="/Admin/SanPham">
+                    <span class="glyphicon glyphicon-arrow-left">
+                        Trở về
+                    </span>
+                </a>
+            </div>
+        </div>
+    }
+</div>

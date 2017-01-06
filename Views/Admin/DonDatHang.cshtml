@@ -1,0 +1,83 @@
+﻿@model IEnumerable<WebBanBanh.Models.DONDATHANG>
+
+@{
+    ViewBag.Title = "DonDatHang";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .my-center {
+        text-align: center;
+    }
+
+    .my-table tr th, td {
+        vertical-align: baseline !important;
+    }
+
+    .my-table th {
+        background-color: #808080;
+        color: #fcfcfc;
+    }
+</style>
+<h2 style="text-align: center; font-weight: bold">THÔNG TIN ĐƠN ĐẶT HÀNG</h2>
+<table class="table table-bordered my-table">
+    <tr style="font-weight: bold; text-align: center">
+        <th>
+            Mã đơn hàng
+        </th>
+        <th>
+            Khách hàng
+        </th>
+        <th>
+            Ngày đặt
+        </th>
+        <th>
+            Địa chỉ giao hàng
+        </th>
+        <th>
+            Ngày hẹn giao hàng
+        </th>
+        <th>
+            Tình trạng
+        </th>
+        <th class="my-center">
+            <span class="fa fa-gears"></span>
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaDDH)
+            </td>
+            <td>
+                @item.KHACHHANG.HoTenKH
+            </td>
+            <td>
+                @item.NgayDat.Value.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DCGiaoHang)
+            </td>
+            <td>
+                @item.NgayGiao.Value.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @if (item.TinhTrangGiaoHang == true)
+                {
+                    <label>Đã giao hàng</label>
+                }
+                else
+                {
+                    <label>Chưa giao hàng</label>
+                }
+            </td>
+            <td class="my-center">
+                <a title="Xuất hóa đơn" class="btn btn-success" href="@Url.Action("Report","Admin", new { maDDH = item.MaDDH })" target="_blank"><span class="icon_printer-alt"></span> </a>
+                <a title="Sửa thông tin sản phẩm" class="btn btn-warning" href="@Url.Action("SuaDDH","Admin", new { maDDH = item.MaDDH })"><span class="icon_pencil-edit_alt"></span> </a>
+                <a title="Xem chi tiết sản phẩm" class="btn btn-info" href="@Url.Action("ChitietDDH", "Admin", new { maDDH = item.MaDDH })"><span class="icon_info_alt"></span> </a>
+                <a title="Xóa sản phẩm" class="btn btn-danger" href="@Url.Action("XoaDDH", "Admin", new { maDDH = item.MaDDH })"><span class="icon_trash_alt"></span> </a>
+            </td>
+        </tr>
+    }
+</table>

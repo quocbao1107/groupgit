@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lee's Store - Chuyên cung cấp bánh kẹo chất lượng giá rẻ...</title>
+    <script src="~/Scripts/modernizr-2.6.1.min.js"></script>
+    <script src="~/Scripts/lean-slider.js"></script>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Content/sample-styles.css" rel="stylesheet" />
+    <link href="~/Content/lean-slider.css" rel="stylesheet" />
+    <link href="~/Content/style.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body style="background-image: url('../../images/background.jpg')  ">
+    <div class="container-fluid" id="fixNav">
+        <nav class=" navbar navbar-inverse" style="margin-bottom:0;height:25px">
+
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="row">
+                <div class="col-md-1"></div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="col-md-6 ">
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li>
+
+                                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="#" style="padding:2px 15px"><img style="height:45px;margin-left:5px;margin-top:0" src="~/images/logo.png" />Lee's Store</a>
+
+                            </li>
+                            @*<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>*@
+                            @*<li class=" glyphicon glyphicon-home" style="font-size:30px;color:white;text-align:center;margin-top:13px; margin-bottom:0;"></li>*@
+                            <li style=""><a href="~/Home/index">TRANG CHỦ</a></li>
+                            <li style=""><a href="~/Clock/SanPham">SẢN PHẨM</a></li>
+                            
+                            <li style=""><a href="#zbwid-46def30e">GÓP Ý</a></li>
+                            <li style=""><a href="~/NguoiDung/lienhe">LIÊN HỆ</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <ul class="nav navbar-nav navbar-right ">
+                        <li style=" margin-top:10px; "> <p><a style="color:#ffffff;text-decoration:none;font-size:20px" href="@Url.Action("GioHang","GioHang")" class="glyphicon glyphicon-shopping-cart"></a>@Html.Action("GioHangPartial", "GioHang")</p> </li>
+                        @if (Session["TaiKhoan"] == null)
+                        {
+
+                            <li><a href="~/NguoiDung/DangNhap">ĐĂNG NHẬP</a></li>
+                                        <li><a href="~/NguoiDung/DangKy">ĐĂNG KÝ</a></li>
+                        }
+                        else
+                        {
+
+                            <li><a href="~/NguoiDung/DangNhap"><b></b>@Session["Name"] !!!</a></li>
+                                        <li><a href="~/NguoiDung/DangXuat">ĐĂNG XUẤT</a></li>
+                        }
+                    </ul>
+                </div>
+                <div class="col-md-1"></div>
+            </div><!-- /.navbar-collapse -->
+        </nav>
+    </div> <!-- /.container-fluid -->
+    @*----------------Body-------------------*@
+
+    <div class="container">
+        <div class="slider-wrapper" style="margin:5px 0%;">
+            <div id="slider">
+                <div class="slide3">
+                    <img style="margin-top: 40px;width:100%;" src="~/images/anhbia.jpg" alt="" />
+                </div>
+                @*<div class="slide4">
+                    <img src="~/images/1.jpg" alt="" />
+                </div>*@
+            </div>
+            <div id="slider-direction-nav"></div>
+            <div id="slider-control-nav"></div>
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <footer style="text-align:center;border:#222 solid 2px;background:#222;height:40px;color:white">
+        <p style="margin-top:5px">  &copy; LẬP TRÌNH WEB - GVHD: DƯƠNG THÀNH PHẾT</p>
+    </footer>
+</body>
+</html>
+<script type="text/javascript">
+    $(document).ready(function () {
+        var slider = $('#slider').leanSlider({
+            directionNav: '#slider-direction-nav',
+            controlNav: '#slider-control-nav'
+        });
+    });
+</script>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)

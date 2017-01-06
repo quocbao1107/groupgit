@@ -1,0 +1,121 @@
+﻿@model  WebBanBanh.Models.DONDATHANG
+@*@model IEnumerable<SHOPDONGHO.Models.CHITIETDDH>*@
+@{
+    ViewBag.Title = "ChitietDDH";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .my-button {
+        width: 150px;
+        margin-left: 10px;
+    }
+</style>
+<h2 style="font-weight:bold">CHI TIẾT ĐƠN ĐẶT HÀNG</h2>
+
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Ngày đặt:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayDat)
+        </dd>
+        <dt>
+            Tình trạng giao hàng:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TinhTrangGiaoHang)
+        </dd>
+        <dt>
+            Tên người nhận:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenNguoiNhan)
+        </dd>
+
+        <dt>
+            SĐT người nhận:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SdtNguoiNhan)
+        </dd>
+
+        <dt>
+            DC Giao hàng:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DCGiaoHang)
+        </dd>
+
+        <dt>
+            Ngày giao:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NgayGiao)
+        </dd>
+
+        <dt>
+            Mã KH:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.KHACHHANG.MaKH)
+        </dd>
+
+    </dl>
+</div>
+<h3>DANH SÁCH CÁC MẶT HÀNG</h3>
+<table class="table-bordered">
+    <tr>
+        <th>
+            Mã sản phẩm
+        </th>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Đơn giá
+        </th>
+        <th>
+            Số lượng bán
+        </th>
+        <th>
+            Thành tiền
+        </th>
+    </tr>
+    @foreach (var item in @ViewBag.chiTiets)
+    {
+        <tr>
+            <td>@item.SANPHAM.MaSP</td>
+            <td>@item.SANPHAM.TenSP</td>
+            <td>@String.Format("{0:0,0}", @item.DonGia)VNĐ</td>
+            <td>@item.SoLuongBan</td>
+            <td>@String.Format("{0:0,0}", item.DonGia * item.SoLuongBan)VNĐ</td>
+        </tr>
+
+    }
+    <tr>
+        <td>Tổng cộng: <span>@String.Format("{0:0,0}", ViewBag.Tongtien) VNĐ</span></td>
+    </tr>
+</table>
+<div class="row">
+    <div class="col-lg-offset-3 col-lg-9">
+        <button class="btn btn-info my-button" type="submit">
+            <span class="icon_floppy_alt"></span>
+            Lưu
+        </button>
+        <a class="btn btn-warning my-button" href="/Admin/SanPham">
+            <span class="glyphicon glyphicon-arrow-left">
+                Trở về
+            </span>
+        </a>
+    </div>
+</div>
+

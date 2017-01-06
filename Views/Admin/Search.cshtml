@@ -1,0 +1,109 @@
+﻿@model IEnumerable<WebBanBanh.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "SanPham";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<h2 class=" page-header"><i class="fa fa-laptop"></i>QUẢN LÝ THÔNG TIN SẢN PHẨM</h2>
+<style>
+    .my-center {
+        text-align: center;
+    }
+
+    .my-table tr th, td {
+        vertical-align: baseline !important;
+    }
+
+    .table th {
+        background-color: #808080;
+        color: #fcfcfc;
+        text-align: center;
+    }
+</style>
+<div class="row">
+    <div class="col-md-1">
+        <p class="btn btn-info">
+            <span class="fa fa-plus">
+                @Html.ActionLink("Thêm mới", "ThemmoiSP")
+            </span>
+        </p>
+    </div>
+    <div class="col-md-3">
+        @using (Html.BeginForm("Search", "Admin", FormMethod.Post))
+        {
+            <ul class="nav top-menu">
+                <li>
+                    <form class="navbar-form">
+                        <input class="form-control" placeholder="Search" name="Keywords" type="text">
+
+                    </form>
+                </li>
+            </ul>
+        }
+    </div>
+
+</div>
+<!--  search form start -->
+<!--  search form end -->
+<table class=" table table-bordered table">
+    <tr style="text-align: center;font-weight: bold">
+        <th>
+            Mã sản phẩm
+        </th>
+        <th>
+            Tên sản phẩm
+        </th>
+        <th>
+            Giá bán
+        </th>
+        <th>
+            Ảnh bìa
+        </th>
+        <th>
+            Ngày cập nhật
+        </th>
+        <th>
+            Số lượng tồn
+        </th>
+        <th class="center">
+            <span class="fa fa-gears"></span>
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.MaSP)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TenSP)
+            </td>
+            <td>
+                @String.Format("{0:#,##0}", item.GiaBan) VNĐ
+            </td>
+            @*<td>
+                    @Truncate(item.MoTa, 100)
+                </td>*@
+            <td><img src="~/HinhSanPham/@item.AnhBia" width="70px" height="70px" /></td>
+            <td>
+                @item.NgayCapNhat.Value.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoLuongTon)
+            </td>
+            <td class="my-center">
+                <a title="Sửa thông tin sản phẩm" class="btn btn-warning" href="@Url.Action("SuaSP","Admin", new { maSP = item.MaSP })"><span class="icon_pencil-edit_alt"></span> </a>
+                <a title="Xem chi tiết sản phẩm" class="btn btn-info" href="@Url.Action("ChitietSP", "Admin", new { maSP = item.MaSP })"><span class="icon_info_alt"></span> </a>
+                <a title="Xóa sản phẩm" class="btn btn-danger" href="@Url.Action("XoaSP", "Admin", new { maSP = item.MaSP })"><span class="icon_trash_alt"></span> </a>
+            </td>
+        </tr>
+    }
+</table>
+@* Tao liên kết các trang  *@
+@*Trang @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)/@Model.PageCount;*@
+
+<style>
+    .MenuTrang li {
+        display: inline;
+    }
+</style>
