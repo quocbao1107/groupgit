@@ -1,0 +1,49 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+
+
+<style type="text/css">
+    #Datmua a {
+        clear: both;
+        background-color: red;
+        color: white;
+        width: 120px;
+        height: 43px;
+        display: block;
+        float: right;
+        text-align: center;
+        padding-top: 10px;
+        text-decoration: none;
+        font-weight: bold;
+        margin-top: -15px;
+        margin-bottom: 5px;
+        margin-right: 20px;
+    }
+
+        #Datmua a:hover {
+            background-color: dodgerblue;
+            color: white;
+        }
+</style>
+
+<h3 style="text-align:center; font-weight:bold; color:black;margin-top:0">DANH MỤC TÌM KIẾM</h3>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3">
+            <a href="@Url.Action("ChitietSP", "Candy", new { id = item.MaSP })" title="">
+                <img src="~/HinhSanPham/@item.AnhBia" alt="@item.TenSP" height="150" width="150" style="border: #222 solid 1px;" />
+            </a>
+            <a href="#" title="@item.TenSP">
+                <p style="margin:5px auto;text-align:center;color:black">@item.TenSP</p>
+            </a>
+            <p style="text-align:center;color:black">Giá: @String.Format("{0:#,##0}", item.GiaBan) VNĐ</p>
+            <p id="Datmua">
+                <a href="@Url.Action("ThemGioHang","GioHang",new {@iMaSP=@item.MaSP,@strURL=Request.Url.ToString()})" class="list-group-item">ĐẶT MUA</a>
+            </p>
+        </div>
+    }
+</div>
