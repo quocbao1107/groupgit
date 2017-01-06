@@ -1,0 +1,127 @@
+﻿@using WebBanBanh.Models
+@model NguoiNhan
+
+@{
+    ViewBag.Title = "DatHang";
+    Layout = "~/Views/Shared/_LayoutNguoiDung.cshtml";
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+}
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <<h2 style="text-align:center;color:black">ĐƠN ĐẶT HÀNG</h2>
+        <table class="table">
+            <tr style="text-align:center;font-weight:bold">
+
+                <td style="color:black;font-weight:bold;"> Tên bánh/td>
+                <td style="color:black;font-weight:bold;"> Ảnh bìa</td>
+                <td style="color:black;font-weight:bold;"> Số lượng</td>
+                <td style="color:black;font-weight:bold;"> Đơn giá</td>
+                <td style="color:black;font-weight:bold;">Thành tiền</td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+
+            @foreach (var item in @ViewBag.lstGioHang)
+            {
+
+                <tr style="text-align:center;font-weight:bold">
+                    <td style="color:black;">@item.sTenSP</td>
+                    @using (Html.BeginForm("CapNhatGioHang", "GioHang", new { @iMaSP = item.iMaSP }))
+                    {
+                        <td><img src="~/HinhSanPham/@item.sAnhBia" width="70px" height="70px" /></td>
+                        <td><input type="number" min="1" name="txtSoLuong" value="@item.sSoLuong" style="background-color:white;width:70px;" /></td>
+                        <td style="color:black">@String.Format("{0:0,0}", item.dGiaBan)</td>
+                        <td style="color:black"></td>
+                        <td style="width:90px;color:black">@String.Format("{0:0,0}", item.dThanhTien)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    }
+                </tr>
+            }
+
+            <tr style="color:black;">
+                <td colspan="9" style="text-align: right;font-weight:bold;">Tổng tiền: @String.Format("{0:0,0}", ViewBag.TongTien) VNĐ</td>
+            </tr>
+
+        </table>
+
+        <h2 style="text-align:center;color:black">THÔNG TIN ĐẶT HÀNG</h2>
+        @{
+            KHACHHANG kh = (KHACHHANG)Session["TaiKhoan"];
+        }
+
+        @using (Html.BeginForm("DatHang", "GioHang", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+            <table class="table">
+                <tr style="height:40px">
+                    <td style="color:black;font-weight:bold">Họ tên khách hàng</td>
+                    <td style="color:black;">@kh.HoTenKH</td>
+                </tr>
+                <tr style="height:40px">
+                    <td style="color:black;font-weight:bold">Địa chỉ khách hàng</td>
+                    <td style="color:black;">@kh.DiaChiKH</td>
+                </tr>
+                <tr>
+                    <td style="color:black;font-weight:bold">Điện thoại khách hàng</td>
+                    <td style="color:black;">@kh.DienThoaiKH</td>
+                </tr>
+                <tr style="height:40px">
+                    <td style="color:black;font-weight:bold">Ngày đặt</td>
+                    <td style="color:black;">@DateTime.Now.ToShortDateString()</td>
+                </tr>
+                <tr>
+                    <td style="color:black;font-weight:bold">Họ tên người nhận</td>
+                    <td style="font-weight:bold">
+                        @Html.EditorFor(model => model.TenNguoiNhan, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.TenNguoiNhan, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color:black;font-weight:bold">Địa chỉ giao hàng</td>
+                    <td style="font-weight:bold">
+                        @Html.EditorFor(model => model.DCGiaoHang, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.DCGiaoHang, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr>
+                    <td style="color:black;font-weight:bold">Số điện thoại người nhận</td>
+                    <td style="font-weight:bold">
+                        @Html.EditorFor(model => model.SdtNguoiNhan, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.SdtNguoiNhan, "", new { @class = "text-danger" })
+                    </td>
+                </tr>
+                <tr style="height:40px">
+                    <td style="color:black;font-weight:bold">Ngày giao hàng</td>
+                    <td style="font-weight:bold">
+                        <input type="text" name="NgayGiao" id="NgayGiao" readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="submit" class="btn btn-default" value="Đồng ý đặt hàng">
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <div class="col-md-2"></div>
+</div>
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<script src="~/Scripts/jquery.js"></script>
+<script src="~/Scripts/jquery-ui.js"></script>
+<script>
+    $("#NgayGiao").datepicker({
+        dateFormat: "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true,
+        minDate: 2,
+        maxYear: 2
+    }).datepicker("setDate", new Date());
+</script>
