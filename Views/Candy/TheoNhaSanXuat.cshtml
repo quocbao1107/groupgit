@@ -1,0 +1,8 @@
+﻿@model IEnumerable<WebBanBanh.Models.NHASANXUAT>
+
+@foreach (var item in Model)
+{
+    <div class="panel-heading">
+        <a style="color:#222" href="@Url.Action("SPNhaSanXuat","Candy",new {id=item.MaNSX})">@item.TenNSX</a>
+    </div>
+}

@@ -1,0 +1,9 @@
+﻿@model IEnumerable<WebBanBanh.Models.LOAISP>
+
+@foreach (var item in Model)
+{
+    <div class="panel-heading">
+        <a style="color:#222" href="@Url.Action("SPLoai","Candy",new {id=item.MaLoaiSP})">@item.TenLoaiSP</a>
+    </div>
+}
+

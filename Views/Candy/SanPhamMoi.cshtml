@@ -1,0 +1,20 @@
+﻿@model IEnumerable<WebBanBanh.Models.SANPHAM>
+
+@{
+    ViewBag.Title = "SanPhamMoi";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<h2 style="text-align:center">DANH MỤC SẢN PHẨM MỚI</h2>
+
+@foreach (var item in Model)
+{
+    <div class="col-md-3">
+        <a href="@Url.Action("ChitietSP", "Candy", new { id = item.MaSP })" title="">
+            <img src="~/HinhSanPham/@item.AnhBia" alt="@item.TenSP" width="150px" height="150px" style="border: #222 solid 1px;">
+        </a>
+        <a href="@Url.Action("ChitietSP", "Candy", new { id = item.MaSP })" title="@item.TenSP">
+            <p style="margin:5px auto;text-align:center">@item.TenSP</p>
+        </a>
+        <p style="text-align:center">Giá: @String.Format("{0:#,##0}", item.GiaBan) VNĐ</p>
+    </div>
+}
